@@ -1,14 +1,11 @@
-# Gunakan FrankenPHP image
 FROM dunglas/frankenphp
 
-# Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apk add --no-cache \
+# Install PHP extensions
+RUN apt-get update && apt-get install -y \
     php-bcmath \
-    php-pdo \
-    php-pdo_mysql \
+    php-mysql \
     php-mbstring \
     php-tokenizer \
     php-dom \
@@ -20,18 +17,23 @@ RUN apk add --no-cache \
     php-xml \
     php-session \
     php-gd \
-    php-mysqli \
-    php-pecl-redis \
-    php-pecl-swoole
+    php-redis \
+    php-swoole \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-# Copy Laravel file to container
+# Copy source
 COPY . .
 
-# Install Composer dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+ && composer install --no-dev --optimize-autoloader
 
-# Change permission for Laravel storage dan cache
+# Set permissions
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 
-# Run migration
+# Don't run migrations here!
+# Run them separately during deployment or entrypoint
 RUN php artisan migrate --force
+
+EXPOSE 80
