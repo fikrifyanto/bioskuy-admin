@@ -1,5 +1,5 @@
 # Gunakan FrankenPHP image
-FROM dunglas/frankenphp:1.1.4
+FROM dunglas/frankenphp
 
 # Set working directory
 WORKDIR /app
