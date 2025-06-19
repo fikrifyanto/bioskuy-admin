@@ -4,23 +4,22 @@ WORKDIR /app
 
 # Install PHP extensions
 RUN apt-get update && apt-get install -y \
-    php-bcmath \
-    php-mysql \
-    php-mbstring \
-    php-tokenizer \
-    php-dom \
-    php-simplexml \
-    php-fileinfo \
-    php-curl \
-    php-ctype \
-    php-opcache \
-    php-xml \
-    php-session \
-    php-gd \
-    php-redis \
-    php-swoole \
+    php8.2-bcmath \
+    php8.2-mysql \
+    php8.2-mbstring \
+    php8.2-tokenizer \
+    php8.2-xml \
+    php8.2-fileinfo \
+    php8.2-curl \
+    php8.2-ctype \
+    php8.2-opcache \
+    php8.2-session \
+    php8.2-gd \
+    php8.2-redis \
+    php8.2-simplexml \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+
 
 # Copy source
 COPY . .
