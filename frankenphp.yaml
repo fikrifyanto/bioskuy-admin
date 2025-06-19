@@ -1,0 +1,4 @@
+app:
+  handler: public/index.php
+  document_root: public
+  workers: 4

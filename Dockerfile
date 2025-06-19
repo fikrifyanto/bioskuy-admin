@@ -1,17 +1,37 @@
-FROM dunglas/frankenphp:php8.3
+# Gunakan FrankenPHP image
+FROM dunglas/frankenphp:1.1.4
 
-ENV SERVER_NAME=":80"
-
+# Set working directory
 WORKDIR /app
 
-COPY . /app
+# Install system dependencies
+RUN apk add --no-cache \
+    php-bcmath \
+    php-pdo \
+    php-pdo_mysql \
+    php-mbstring \
+    php-tokenizer \
+    php-dom \
+    php-simplexml \
+    php-fileinfo \
+    php-curl \
+    php-ctype \
+    php-opcache \
+    php-xml \
+    php-session \
+    php-gd \
+    php-mysqli \
+    php-pecl-redis \
+    php-pecl-swoole
 
-RUN apt update && apt install zip libzip-dev -y && \
-    docker-php-ext-install zip && \
-    docker-php-ext-enable zip
+# Copy Laravel file to container
+COPY . .
 
-COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
+# Install Composer dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-RUN composer install
+# Change permission for Laravel storage dan cache
+RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 
-
+# Run migration
+RUN php artisan migrate --force
