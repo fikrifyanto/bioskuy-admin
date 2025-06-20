@@ -14,9 +14,7 @@ COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 RUN composer install
 
-RUN mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache && \
-    chmod -R 777 storage bootstrap/cache && \
-    php artisan storage:link && \
+RUN php artisan storage:link && \
     php artisan filament:optimize && \
     php artisan config:cache && \
     php artisan view:cache
