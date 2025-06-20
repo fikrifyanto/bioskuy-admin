@@ -23,7 +23,6 @@ class MovieResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->disk('s3')
-                    ->visibility('private')
                     ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
@@ -44,7 +43,8 @@ class MovieResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('s3'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('genre')
