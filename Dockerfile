@@ -20,6 +20,6 @@ RUN php artisan view:cache
 RUN php artisan storage:link
 RUN mkdir -p storage/framework/views
 RUN chmod -R 777 storage
-RUN php artisan migrate
+RUN php artisan migrate --force
 
 
