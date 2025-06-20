@@ -14,8 +14,7 @@ COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 RUN composer install
 
-RUN php artisan storage:link && \
-    php artisan filament:optimize && \
+RUN php artisan filament:optimize && \
     php artisan config:cache && \
     php artisan view:cache
 
