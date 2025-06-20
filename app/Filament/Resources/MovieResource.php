@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MovieResource\Pages;
-use App\Filament\Resources\MovieResource\RelationManagers;
 use App\Models\Movie;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MovieResource extends Resource
 {
@@ -23,6 +20,9 @@ class MovieResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
@@ -31,7 +31,7 @@ class MovieResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('duration')
                     ->required()
-                    ->maxLength(255),
+                    ->numeric(),
                 Forms\Components\TextInput::make('rating')
                     ->required()
                     ->numeric(),
@@ -42,6 +42,7 @@ class MovieResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('genre')

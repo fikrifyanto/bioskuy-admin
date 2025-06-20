@@ -12,6 +12,7 @@ class Movie extends Model
         'genre',
         'duration',
         'rating',
+        'image'
     ];
 
     protected $casts = [
