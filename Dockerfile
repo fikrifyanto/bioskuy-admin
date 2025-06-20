@@ -14,12 +14,12 @@ COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 RUN composer install
 
-RUN php artisan filament:optimize \
-RUN php artisan config:cache \
-RUN php artisan view:cache \
-RUN php artisan storage:link \
-RUN mkdir -p storage/framework/views \
-RUN chmod -R 777 storage \
+RUN php artisan filament:optimize
+RUN php artisan config:cache
+RUN php artisan view:cache
+RUN php artisan storage:link
+RUN mkdir -p storage/framework/views
+RUN chmod -R 777 storage
 RUN php artisan migrate
 
 
