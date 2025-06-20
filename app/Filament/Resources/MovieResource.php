@@ -23,7 +23,7 @@ class MovieResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->disk('s3')
-                    ->visibility('public')
+                    ->visibility('private')
                     ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
