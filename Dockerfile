@@ -19,7 +19,7 @@ RUN php artisan filament:optimize && \
     php artisan view:cache && \
     php artisan storage:link && \
     mkdir -p storage/framework/views && \
-    chmod -R 777 storage \
+    chmod -R 777 storage && \
     php artisan migrate
 
 
