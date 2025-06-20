@@ -22,6 +22,7 @@ class MovieResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('image')
                     ->image()
+                    ->disk('s3')
                     ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
