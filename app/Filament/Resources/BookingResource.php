@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
-use App\Filament\Resources\BookingResource\RelationManagers;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Filament\Forms;
@@ -12,14 +11,17 @@ use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BookingResource extends Resource
 {
     protected static ?string $model = Booking::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {
@@ -45,7 +47,7 @@ class BookingResource extends Resource
                             ->relationship('seat', 'seat_number')
                             ->required(),
                     ])
-                    ->columns(2),
+                    ->columns(),
             ]);
     }
 
@@ -60,7 +62,7 @@ class BookingResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
                     ->prefix('Rp ')
-                    ->formatStateUsing(fn ($state) => number_format($state, 0, '.', ','))
+                    ->formatStateUsing(fn ($state) => number_format($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),

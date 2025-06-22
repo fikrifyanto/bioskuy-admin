@@ -13,6 +13,10 @@ class Customer extends Model
         'password',
     ];
 
+    protected $hidden = [
+        'password',
+    ];
+
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
