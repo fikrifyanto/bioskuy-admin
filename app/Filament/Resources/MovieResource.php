@@ -67,6 +67,7 @@ class MovieResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -87,6 +88,7 @@ class MovieResource extends Resource
     {
         return [
             'index' => Pages\ListMovies::route('/'),
+            'view' => Pages\ViewMovie::route('/{record}'),
             'create' => Pages\CreateMovie::route('/create'),
             'edit' => Pages\EditMovie::route('/{record}/edit'),
         ];

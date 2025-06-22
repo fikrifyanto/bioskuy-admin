@@ -59,6 +59,7 @@ class TheaterResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -79,6 +80,7 @@ class TheaterResource extends Resource
     {
         return [
             'index' => Pages\ListTheaters::route('/'),
+            'view' => Pages\ViewTheater::route('/{record}'),
             'create' => Pages\CreateTheater::route('/create'),
             'edit' => Pages\EditTheater::route('/{record}/edit'),
         ];
