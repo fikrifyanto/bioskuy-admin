@@ -80,8 +80,8 @@ class TheaterResource extends Resource
     {
         return [
             'index' => Pages\ListTheaters::route('/'),
-            'view' => Pages\ViewTheater::route('/{record}'),
             'create' => Pages\CreateTheater::route('/create'),
+            'view' => Pages\ViewTheater::route('/{record}'),
             'edit' => Pages\EditTheater::route('/{record}/edit'),
         ];
     }

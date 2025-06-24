@@ -88,8 +88,8 @@ class MovieResource extends Resource
     {
         return [
             'index' => Pages\ListMovies::route('/'),
-            'view' => Pages\ViewMovie::route('/{record}'),
             'create' => Pages\CreateMovie::route('/create'),
+            'view' => Pages\ViewMovie::route('/{record}'),
             'edit' => Pages\EditMovie::route('/{record}/edit'),
         ];
     }
